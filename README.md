@@ -16,7 +16,7 @@ This is an overview of the files and directories in this repository.
 
 ### `Downloads`
 
-Directory containing downloaded data.
+Directory containing downloaded data. Please note that this directory is not included in the repository, as some data is too large to be uploaded.
 
 #### `main.py`
 
