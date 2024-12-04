@@ -1,0 +1,142 @@
+Cell Type Statistics:
+                 cell_count  percentage  pseudotime_mean  pseudotime_std  pseudotime_count
+paul15_clusters                                                                           
+14Mo                    373   13.663004         0.159181        0.016869               373
+2Ery                    329   12.051282         0.270765        0.021507               329
+13Baso                  300   10.989011         0.142378        0.025574               300
+3Ery                    246    9.010989         0.248634        0.037135               246
+15Mo                    186    6.813187         0.182419        0.016748               186
+5Ery                    180    6.593407         0.202671        0.044746               180
+6Ery                    173    6.336996         0.108428        0.049167               173
+7MEP                    167    6.117216         0.037510        0.015390               167
+16Neu                   164    6.007326         0.201295        0.017446               164
+10GMP                   153    5.604396         0.074072        0.029214               153
+4Ery                    124    4.542125         0.241514        0.031325               124
+12Baso                   69    2.527473         0.042296        0.018590                69
+8Mk                      68    2.490842         0.021310        0.015817                68
+9GMP                     63    2.307692         0.051312        0.020888                63
+1Ery                     43    1.575092         0.303643        0.016940                43
+19Lymph                  31    1.135531         0.273622        0.059748                31
+11DC                     30    1.098901         0.892412        0.136339                30
+17Neu                    22    0.805861         0.054716        0.012721                22
+18Eos                     9    0.329670         0.123976        0.027288                 9
+
+Fairness Metrics:
+
+7MEP:
+  representation_ratio: 1.162
+  mean_pseudotime: 0.038
+  std_pseudotime: 0.015
+  sample_size: 167.000
+
+15Mo:
+  representation_ratio: 1.295
+  mean_pseudotime: 0.182
+  std_pseudotime: 0.017
+  sample_size: 186.000
+
+3Ery:
+  representation_ratio: 1.712
+  mean_pseudotime: 0.249
+  std_pseudotime: 0.037
+  sample_size: 246.000
+
+4Ery:
+  representation_ratio: 0.863
+  mean_pseudotime: 0.242
+  std_pseudotime: 0.031
+  sample_size: 124.000
+
+2Ery:
+  representation_ratio: 2.290
+  mean_pseudotime: 0.271
+  std_pseudotime: 0.021
+  sample_size: 329.000
+
+17Neu:
+  representation_ratio: 0.153
+  mean_pseudotime: 0.055
+  std_pseudotime: 0.012
+  sample_size: 22.000
+
+14Mo:
+  representation_ratio: 2.596
+  mean_pseudotime: 0.159
+  std_pseudotime: 0.017
+  sample_size: 373.000
+
+13Baso:
+  representation_ratio: 2.088
+  mean_pseudotime: 0.142
+  std_pseudotime: 0.026
+  sample_size: 300.000
+
+8Mk:
+  representation_ratio: 0.473
+  mean_pseudotime: 0.021
+  std_pseudotime: 0.016
+  sample_size: 68.000
+
+9GMP:
+  representation_ratio: 0.438
+  mean_pseudotime: 0.051
+  std_pseudotime: 0.021
+  sample_size: 63.000
+
+10GMP:
+  representation_ratio: 1.065
+  mean_pseudotime: 0.074
+  std_pseudotime: 0.029
+  sample_size: 153.000
+
+16Neu:
+  representation_ratio: 1.141
+  mean_pseudotime: 0.201
+  std_pseudotime: 0.017
+  sample_size: 164.000
+
+5Ery:
+  representation_ratio: 1.253
+  mean_pseudotime: 0.203
+  std_pseudotime: 0.045
+  sample_size: 180.000
+
+1Ery:
+  representation_ratio: 0.299
+  mean_pseudotime: 0.304
+  std_pseudotime: 0.017
+  sample_size: 43.000
+
+6Ery:
+  representation_ratio: 1.204
+  mean_pseudotime: 0.108
+  std_pseudotime: 0.049
+  sample_size: 173.000
+
+19Lymph:
+  representation_ratio: 0.216
+  mean_pseudotime: 0.274
+  std_pseudotime: 0.059
+  sample_size: 31.000
+
+12Baso:
+  representation_ratio: 0.480
+  mean_pseudotime: 0.042
+  std_pseudotime: 0.018
+  sample_size: 69.000
+
+18Eos:
+  representation_ratio: 0.063
+  mean_pseudotime: 0.124
+  std_pseudotime: 0.026
+  sample_size: 9.000
+
+11DC:
+  representation_ratio: 0.209
+  mean_pseudotime: 0.892
+  std_pseudotime: 0.134
+  sample_size: 30.000
+
+ANOVA test for pseudotime differences:
+F-statistic: 1770.308
+p-value: 0.000e+00
