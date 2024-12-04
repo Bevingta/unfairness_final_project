@@ -54,7 +54,6 @@ def save_visualizations(adata, stats):
     plt.title('Cell Type Distribution')
     plt.xticks(rotation=45)
     plt.ylabel('Percentage')
-    plt.tight_layout()
     plt.savefig('analysis_results/cell_type_distribution.png')
     plt.close()
     
@@ -62,7 +61,6 @@ def save_visualizations(adata, stats):
     plt.figure(figsize=(10, 8))
     sc.pl.umap(adata, color='paul15_clusters', show=False)
     plt.title('UMAP by Cell Type')
-    plt.tight_layout()
     plt.savefig('analysis_results/umap_cell_types.png')
     plt.close()
     
@@ -71,7 +69,6 @@ def save_visualizations(adata, stats):
     sns.boxplot(data=adata.obs, x='paul15_clusters', y='dpt_pseudotime')
     plt.xticks(rotation=45)
     plt.title('Pseudotime Distribution by Cell Type')
-    plt.tight_layout()
     plt.savefig('analysis_results/pseudotime_distribution.png')
     plt.close()
     
@@ -80,7 +77,6 @@ def save_visualizations(adata, stats):
     key_genes = ['Mpo', 'Elane', 'Prtn3']
     sc.pl.violin(adata, key_genes, groupby='paul15_clusters', show=False)
     plt.title('Key Gene Expression by Cell Type')
-    plt.tight_layout()
     plt.savefig('analysis_results/gene_expression_patterns.png')
     plt.close()
     
@@ -88,8 +84,22 @@ def save_visualizations(adata, stats):
     plt.figure(figsize=(10, 6))
     sns.kdeplot(data=adata.obs, x='dpt_pseudotime', hue='paul15_clusters')
     plt.title('Trajectory Density by Cell Type')
-    plt.tight_layout()
     plt.savefig('analysis_results/trajectory_density.png')
+    plt.close()
+
+    #6. PAGA Graph
+    plt.figure(figsize=(10, 8))
+    sc.tl.paga(adata, groups='paul15_clusters')
+    sc.pl.paga(adata, color='paul15_clusters', node_size_scale=2, show=False)
+    plt.title('PAGA Graph')
+    plt.savefig('analysis_results/paga_graph.png')
+    plt.close()
+
+    #7. PAGA Graph with pseudotime
+    plt.figure(figsize=(10, 8))
+    sc.pl.paga(adata, color='dpt_pseudotime', node_size_scale=2, show=False)
+    plt.title('PAGA Graph with Pseudotime')
+    plt.savefig('analysis_results/paga_graph_pseudotime.png')
     plt.close()
 
 def calculate_fairness_metrics(adata):
@@ -164,6 +174,8 @@ def main():
     print("- pseudotime_distribution.png")
     print("- gene_expression_patterns.png")
     print("- trajectory_density.png")
+    print("- paga_graph.png")
+    print("- paga_graph_pseudotime.png")
 
 if __name__ == "__main__":
     main()
