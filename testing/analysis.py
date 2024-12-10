@@ -57,13 +57,14 @@ def save_visualizations(adata, stats):
     plt.savefig('analysis_results/cell_type_distribution.png')
     plt.close()
     
-    # 2. UMAP plot
-    plt.figure(figsize=(10, 8))
+    # 2. UMAP by cell type
+    plt.figure(figsize=(30, 15))
     sc.pl.umap(adata, color='paul15_clusters', show=False)
     plt.title('UMAP by Cell Type')
+    plt.subplots_adjust(right=0.62)  # Increase space for legend
     plt.savefig('analysis_results/umap_cell_types.png')
-    plt.close()
-    
+    plt.close()    
+
     # 3. Pseudotime distribution
     plt.figure(figsize=(12, 6))
     sns.boxplot(data=adata.obs, x='paul15_clusters', y='dpt_pseudotime')
@@ -101,14 +102,7 @@ def save_visualizations(adata, stats):
     plt.title('PAGA Graph with Pseudotime')
     plt.savefig('analysis_results/paga_graph_pseudotime.png')
     plt.close()
-
-    #8. UMAP with labels
-    plt.figure(figsize=(10, 8))
-    sc.pl.correlation_matrix(adata, "paul15_clusters")
-    plt.title('UMAP with Cell Type Labels')
-    plt.savefig('analysis_results/umap_cell_types_with_labels.png')
-    plt.close()
-
+    
 def calculate_fairness_metrics(adata):
     """Calculate fairness metrics across cell types"""
     fairness_metrics = {}
@@ -183,7 +177,6 @@ def main():
     print("- trajectory_density.png")
     print("- paga_graph.png")
     print("- paga_graph_pseudotime.png")
-    print("- umap_cell_types_with_labels.png")
 
 if __name__ == "__main__":
     main()
