@@ -88,7 +88,7 @@ def save_visualizations(adata, stats):
     plt.close()
 
     #6. PAGA Graph
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(20, 15))
     sc.tl.paga(adata, groups='paul15_clusters')
     sc.pl.paga(adata, color='paul15_clusters', node_size_scale=2, show=False)
     plt.title('PAGA Graph')
@@ -96,10 +96,17 @@ def save_visualizations(adata, stats):
     plt.close()
 
     #7. PAGA Graph with pseudotime
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(20, 15))
     sc.pl.paga(adata, color='dpt_pseudotime', node_size_scale=2, show=False)
     plt.title('PAGA Graph with Pseudotime')
     plt.savefig('analysis_results/paga_graph_pseudotime.png')
+    plt.close()
+
+    #8. UMAP with labels
+    plt.figure(figsize=(10, 8))
+    sc.pl.correlation_matrix(adata, "paul15_clusters")
+    plt.title('UMAP with Cell Type Labels')
+    plt.savefig('analysis_results/umap_cell_types_with_labels.png')
     plt.close()
 
 def calculate_fairness_metrics(adata):
@@ -176,6 +183,7 @@ def main():
     print("- trajectory_density.png")
     print("- paga_graph.png")
     print("- paga_graph_pseudotime.png")
+    print("- umap_cell_types_with_labels.png")
 
 if __name__ == "__main__":
     main()
