@@ -33,7 +33,7 @@
 \usepackage{xcolor}         % colors
 \usepackage[hang,flushmargin]{footmisc}
 \usepackage{lipsum}
-
+\usepackage{wrapfig}
 
 
 
@@ -97,7 +97,7 @@
 
 
 \begin{abstract}
-  In the field of molecular biology, single-cell RNA sequencing (scRNA-seq) has allowed for the profiling of gene expression at the cellular level; however, limitations such as long turnaround times on sample sequences hinder real-life application. This project seeks to explore how trajectory analysis can be used to construct a timeline-independent analysis of a cell's developmental pathway, specifically for use in cancer research and treatment. Using publicly available data from The Cancer Genome Atlas (TCGA), trajectory analysis is applied to investigate cancers with particularly high metastatic potential, like lung and skin cancers, and their progression within the human body. Tools such as Scanpy and API-based data acquisition address obstacles in data processing, normalization, and integration; this project also investigates biases that can be found in trajectory models like representation and measurement bias. We aim to asses how well trajectory analysis can be used as a tool for understanding tumor development and its applications in precision medicine and treatment whilst maintaining ethical concerns around privacy and equity in healthcare models as a top priority.
+  In the field of molecular biology, single-cell RNA sequencing (scRNA-seq) has allowed for the profiling of gene expression at the cellular level; however, limitations such as long turnaround times on sample sequences hinder real-life application. This project seeks to explore how trajectory analysis can be used to construct a timeline-independent analysis of a cell's developmental pathway, specifically for use in white and red blood cell development. Using publicly available data from the Paul15 dataset available through Scanpy, trajectory analysis is applied to investigate blood cell development, and their progression within the human body. Tools such as Scanpy and API-based data acquisition address obstacles in data processing, normalization, and integration; this project also investigates biases that can be found in trajectory models like representation and measurement bias. We aim to asses how well trajectory analysis can be used as a tool for understanding cell development and its applications in precision medicine and treatment whilst maintaining ethical concerns around privacy and equity in healthcare models as a top priority.
   
   % The abstract paragraph should be indented \nicefrac{1}{2}~inch (3~picas) on both the left- and right-hand margins. Use 10~point type, with a vertical spacing (leading) of 11~points.  The word \textbf{Abstract} must be centered, bold, and in point size 12. Two line spaces precede the abstract. The abstract must be limited to one paragraph.
 \end{abstract}
@@ -105,6 +105,12 @@
 
 \section{Background}
 RNA sequencing is a technique wherein the number of sequences per gene per cell in a sample is isolated in order to better understand and hopefully modify cell behavior. Haque, et al.\footnote{Haque, et al. "A practical guide to single-cell RNA-sequencing for biomedical research and clinical applications". (2017). \url{https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-017-0467-4}}\ goes over how scRNA-seq allows for the comparison of transcriptomes between individual cells, transcriptomes being the RNA sequences that are created from a portion of a genome, the complete set of DNA in an organism contained within every cell in said organism. The investigation of these differences lends itself to the identification of otherwise undetectable cell populations that could potentially be harmful, such as malignant tumors.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{./images/umap.png}
+\caption{Visual representation of an Example Trajectory Plot. Each point in the plot represents a cell / principal component of cells.}
+\end{figure}
 
 scRNA-seq functions by taking a "snapshot" of what genes are active or inactive. When a cell expresses genes, it transcribes a copy of the genome into mRNA; variability among cells comes because not all genes are active in a cell at any given time. Their expression is selective and context-dependent, meaning typically only genes that are relevant to a cell's function or a response to outside stimuli/stress are transcribed. Factors like a cell's environment, signaling molecules, or developmental stage can either activate or repress specific genes. As an example, Gregg L. Semenza found that in cancer cells, hypoxia can activate the genes that promote the formation of new blood vessels, angiogenesis, and deactivate genes controlling cell cycle arrest.\footnote{Semenza. "Targeting HIF-1 for cancer therapy". (2003). \url{https://doi.org/10.1038/nrc1187}} scRNA-seq isolates individual cells from a sample, capturing their RNA content in a specific moment in time. This RNA is then sequenced, identified, and quantified. RNA abundance reflects gene activity; higher levels of RNA therefore indicate a stronger gene expression.\footnote{Svensson, et al. "Exponential scaling of single-cell RNA-seq in the past decade". (2018). \url{https://doi.org/10.1038/nprot.2017.149}}
 
@@ -154,7 +160,23 @@ In the context of medical discovery, this presents a significant challenge. Whil
 
 We found that there are a few avenues of exploration for alleviating these concerns. We theorized that stratifying data collection and processing would help the more underrepresented cell types to get the attention they need. Weighted loss functions can also be used to give rare cell types more of a presence in the training steps. Synthetic data generation techniques may be used to create more of a population for the smaller cell types while maintaining their general characteristics. However, it is important to continue testing to ensure that rare cell types get the weight necessary to be considered, but not too much weight that they themselves become overrepresented in relation to their real population size. 
 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{./images/umap_cell_types.png}
+\caption{Visual representation of an Example Trajectory Plot. Each point in the plot represents a cell / principal component of cells.}
+\end{figure}
+
+
 Even before running trajectory analysis, the output from the dimensionality reduction step already suggested that there was more than met the eye within the dataset. Figure 2 shows a UMAP, which plots the first two Principal Components against one another. The details are somewhat complicated, but all that needs to be known to understand the graph is as follows: 1) Each dot on the graph represents a cell or group of cells, and 2) The closer two points are to one another on the graph, the more similar they are in gene expression. The naive approach to understanding described as a cause for change in Paul, et al, assumes equal “distance” between HSC and terminally differentiated cell types. That is, each cell type which can come to be from an HSC differentiating is equally “different” from that HSC. However, a quick glance at the UMAP shows that two types, 11DC (Dendritic Cells) and 19Lymph (Lymphoid Cells) are clearly separate from the pack. 
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{./images/paga_graph_pseudotime.png}
+\caption{Visual representation of an Example Trajectory Plot. Each point in the plot represents a cell / principal component of cells.}
+\end{figure}
+
 
 This analysis is further underscored by the trajectory plot shown in Figure 3. There are three clear trajectories originating from a central mass at Pseudotime 0. The first lineage ($\shortarrow{3}$) terminates as a Neutrophil (Neu), the second ($\shortarrow{5}$) as an Erythrocyte (Ery), and the third ($\shortarrow{0}$) as a Dendritic Cell (DC). Of these, the lineage of most interest is that of the Dendritic Cells, as the pseudotime variable at terminal identity (~0.9-1.0) suggests a much more involved differentiation process in comparison to those of the first two lineages (~0.25 and ~0.35 respectively). While definite reasons for this difference cannot be drawn from the graph alone, one might hypothesize that the DC differentiation pathway relies on distinct developmental requirements, which may be more reliant on either environmental or intracellular conditions than the other cell types. Further, more directed research would need to be done to confirm or refute such a claim.
 
